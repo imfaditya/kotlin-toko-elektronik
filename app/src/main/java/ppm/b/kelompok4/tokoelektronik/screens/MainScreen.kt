@@ -133,39 +133,94 @@ fun MainScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             NavHost(navController = navController,
-                startDestination = "pengelolaan-Smartphone") {
-                composable("home") {
-                    HomeScreen()
-                }
-                composable("setting") {
-                    SettingScreen()
-                }
-                composable("pengelolaan-Smartphone") {
+                startDestination = "pengelolaan-komputer") {
+
+                composable("pengelolaan-smartphone") {
                     title.value = "Pengelolaan Smartphone"
                     PengelolaanSmartphoneScreen(navController =
                     navController, snackbarHostState =
                     scaffoldState.snackbarHostState, modifier =
                     Modifier.padding(innerPadding))
                 }
+
+                composable("pengelolaan-komputer") {
+                    title.value = "Pengelolaan Komputer"
+                    PengelolaanKomputerScreen(navController =
+                    navController, snackbarHostState =
+                    scaffoldState.snackbarHostState, modifier =
+                    Modifier.padding(innerPadding))
+                }
+
+                composable("pengelolaan-periferal") {
+                    title.value = "Pengelolaan Periferal"
+                    PengelolaanPeriferalScreen(navController =
+                    navController, snackbarHostState =
+                    scaffoldState.snackbarHostState, modifier =
+                    Modifier.padding(innerPadding))
+                }
+
                 composable("tambah-pengelolaan-smartphone") {
-                    title.value = "Tambah Pengelolaan Smartphone"
+                    title.value = "Tambah Data Smartphone"
                     FormPencatatanSmartphone(navController =
                     navController, modifier = Modifier.padding(innerPadding))
                 }
-                composable("edit-pengelolaan-Smartphone/{id}",
+
+                composable("tambah-pengelolaan-komputer") {
+                    title.value = "Tambah Data Komputer"
+                    FormPencatatanKomputer(navController =
+                    navController, modifier = Modifier.padding(innerPadding))
+                }
+
+                composable("tambah-pengelolaan-periferal") {
+                    title.value = "Tambah Data Periferal"
+                    FormPencatatanPeriferal(navController =
+                    navController, modifier = Modifier.padding(innerPadding))
+                }
+
+                composable("edit-pengelolaan-smartphone/{id}",
                     listOf(
                         navArgument("id") {
                             type = NavType.StringType
                         }
                     )) { backStackEntry ->
-                    title.value = "Edit Pengelolaan Sampah"
+                    title.value = "Edit Pengelolaan Smartphone"
                     val id =
                 backStackEntry.arguments?.getString("id")
                     ?: return@composable
                     FormPencatatanSmartphone(navController =
                 navController, id = id, modifier =
                 Modifier.padding(innerPadding))
-            }
+                }
+
+                composable("edit-pengelolaan-komputer/{id}",
+                    listOf(
+                        navArgument("id") {
+                            type = NavType.StringType
+                        }
+                    )) { backStackEntry ->
+                    title.value = "Edit Pengelolaan Komputer"
+                    val id =
+                        backStackEntry.arguments?.getString("id")
+                            ?: return@composable
+                    FormPencatatanKomputer(navController =
+                    navController, id = id, modifier =
+                    Modifier.padding(innerPadding))
+                }
+
+                composable("edit-pengelolaan-periferal/{id}",
+                    listOf(
+                        navArgument("id") {
+                            type = NavType.StringType
+                        }
+                    )) { backStackEntry ->
+                    title.value = "Edit Pengelolaan Periferal"
+                    val id =
+                        backStackEntry.arguments?.getString("id")
+                            ?: return@composable
+                    FormPencatatanPeriferal(navController =
+                    navController, id = id, modifier =
+                    Modifier.padding(innerPadding))
+                }
         }
     }
 }

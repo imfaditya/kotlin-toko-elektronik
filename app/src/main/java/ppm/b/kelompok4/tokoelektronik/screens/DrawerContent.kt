@@ -31,9 +31,9 @@ import androidx.compose.ui.unit.sp
 fun DrawerContent(onClick: (String) -> Unit)
 {
     val menus = listOf(
-        Menu.HOME,
-        Menu.PENGELOLAAN_SAMPAH,
-        Menu.SETTING)
+        Menu.PENGELOLAAN_KOMPUTER,
+        Menu.PENGELOLAAN_PERIFERAL,
+        Menu.PENGELOLAAN_SMARTPHONE)
     val listState = rememberLazyListState()
     Column(
         modifier = Modifier
