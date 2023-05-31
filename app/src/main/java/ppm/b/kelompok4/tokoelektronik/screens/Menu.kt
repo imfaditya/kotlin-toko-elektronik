@@ -12,18 +12,16 @@ enum class Menu (
     val icon: ImageVector,
     val route: String
 ) {
-    HOME(R.string.home, Icons.Default.Home, "home"),
-    PENGELOLAAN_SAMPAH(R.string.pengelolaan_tokoElektronik, Icons.Default.List, "pengelolaan-tokoElektronik"),
-    SETTING(R.string.setting, Icons.Default.Settings,
-        "setting");
+    PENGELOLAAN_KOMPUTER(R.string.pengelolaan_komputer, Icons.Default.List, "pengelolaan-komputer"),
+    PENGELOLAAN_SMARTPHONE(R.string.pengelolaan_smartphone, Icons.Default.List, "pengelolaan-smartphone"),
+    PENGELOLAAN_PERIFERAL(R.string.pengelolaan_periferal, Icons.Default.List, "pengelolaan-periferal");
     companion object {
         fun getTabFromResource(@StringRes resource: Int) : Menu
         {
             return when (resource) {
-                R.string.home -> HOME
-                R.string.pengelolaan_tokoElektronik ->
-                    PENGELOLAAN_SAMPAH
-                else -> SETTING
+                R.string.pengelolaan_komputer -> PENGELOLAAN_KOMPUTER
+                R.string.pengelolaan_periferal -> PENGELOLAAN_PERIFERAL
+                else -> PENGELOLAAN_SMARTPHONE
             }
         }
     }
