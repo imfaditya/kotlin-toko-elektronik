@@ -1,8 +1,12 @@
 package ppm.b.kelompok4.tokoelektronik.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +29,8 @@ import ppm.b.kelompok4.tokoelektronik.model.Smartphone
 
 @Composable
 fun FormPencatatanPeriferal(navController : NavHostController, id: String? = null, modifier: Modifier = Modifier) {
+    val jenisOptions = listOf("Jenis", "Mouse", "Keyboard")
+    var expandDropdown by remember { mutableStateOf(false) }
     val isLoading = remember { mutableStateOf(false) }
     val buttonLabel = if (isLoading.value) "Mohon tunggu..." else
         "Simpan"
@@ -33,7 +39,13 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
     val nama = remember { mutableStateOf(TextFieldValue("")) }
     val harga = remember { mutableStateOf(TextFieldValue("")) }
     val deskripsi = remember { mutableStateOf(TextFieldValue("")) }
-    val jenis = remember { mutableStateOf(TextFieldValue("")) }
+    val (jenis, setJenis) = remember { mutableStateOf(jenisOptions[0]) }
+
+    val icon = if (expandDropdown)
+        Icons.Filled.KeyboardArrowUp
+    else
+        Icons.Filled.KeyboardArrowDown
+
     Column(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()) {
@@ -46,7 +58,7 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            placeholder = { Text(text = "XXXXX") }
+            placeholder = { Text(text = "Nama Barang") }
         )
         OutlinedTextField(
             label = { Text(text = "Harga") },
@@ -57,7 +69,7 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            placeholder = { Text(text = "XXXXX") }
+            placeholder = { Text(text = "Rp. 0") }
         )
         OutlinedTextField(
             label = { Text(text = "Deskripsi") },
@@ -70,19 +82,46 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType =
             KeyboardType.Decimal),
-            placeholder = { Text(text = "64") }
+            placeholder = { Text(text = "Deskripsi") }
         )
-        OutlinedTextField(
-            label = { Text(text = "Jenis") },
-            value = jenis.value,
-            onValueChange = {
-                jenis.value = it
-            },
-            modifier = Modifier
-                .padding(4.dp)
-                .fillMaxWidth(),
-            placeholder = { Text(text = "12 September 2023") }
-        )
+
+        Box(
+            modifier = Modifier.padding(top = 8.dp)
+        ){
+            OutlinedTextField(
+                onValueChange = {},
+                enabled = false,
+                value = jenis,
+                modifier = Modifier
+                    .padding(4.dp)
+                    .fillMaxWidth()
+                    .clickable { expandDropdown = !expandDropdown },
+                trailingIcon = {
+                    Icon(icon, "dropdown icon")
+                },
+                textStyle = TextStyle(color = Color.Black)
+            )
+
+            DropdownMenu(
+                expanded = expandDropdown,
+                onDismissRequest = { expandDropdown = false },
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                jenisOptions.forEach { label ->
+                    DropdownMenuItem(
+                        onClick = {
+                            setJenis(label)
+                            expandDropdown = false
+                        },
+                        enabled = label != jenisOptions[0])
+                    {
+                        Text(text = label)
+                    }
+                }
+            }
+        }
+
         val loginButtonColors = ButtonDefaults.buttonColors(
             backgroundColor = Purple700,
             contentColor = Teal200
@@ -92,21 +131,28 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
             contentColor = Purple700
         )
         Row (modifier = Modifier
-            .padding(4.dp)
+            .padding(horizontal = 4.dp, vertical = 8.dp)
             .fillMaxWidth()) {
-            Button(modifier = Modifier.weight(5f), onClick = {
-                if (id == null) {
-                    scope.launch {
-                        viewModel.insert(nama.value.text, Integer.parseInt(harga.value.text),
-                        deskripsi.value.text, jenis.value.text)
+            Button(modifier = Modifier
+                .weight(1f)
+                .padding(end = 4.dp),
+                onClick = {
+                if (nama.value.text.isNotBlank() && harga.value.text.isNotBlank() && deskripsi.value.text.isNotBlank() && jenis != jenisOptions[0]) {
+                    if (id == null) {
+                        scope.launch {
+                            viewModel.insert(nama.value.text, Integer.parseInt(harga.value.text),
+                                deskripsi.value.text, jenis)
+                        }
+                    } else {
+                        scope.launch {
+                            viewModel.update(id, nama.value.text, Integer.parseInt(harga.value.text),
+                                deskripsi.value.text, jenis)
+                        }
                     }
-                } else {
-                    scope.launch {
-                        viewModel.update(id, nama.value.text, Integer.parseInt(harga.value.text),
-                            deskripsi.value.text, jenis.value.text)
+                    if (!isLoading.value) {
+                        navController.navigate("pengelolaan-periferal")
                     }
                 }
-                navController.navigate("pengelolaan-periferal")
             }, colors = loginButtonColors) {
                 Text(
                     text =  buttonLabel,
@@ -116,11 +162,14 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
                     ), modifier = Modifier.padding(8.dp)
                 )
             }
-            Button(modifier = Modifier.weight(5f), onClick = {
+            Button(modifier = Modifier
+                .weight(1f)
+                .padding(start = 4.dp),
+                onClick = {
                 nama.value = TextFieldValue("")
                 harga.value = TextFieldValue("")
                 deskripsi.value = TextFieldValue("")
-                jenis.value = TextFieldValue("")
+                setJenis(jenisOptions[0])
             }, colors = resetButtonColors) {
                 Text(
                     text = "Reset",
@@ -143,7 +192,7 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
                     nama.value = TextFieldValue(Periferal.nama)
                     harga.value = TextFieldValue(Periferal.harga.toString())
                     deskripsi.value = TextFieldValue(Periferal.deskripsi)
-                    jenis.value = TextFieldValue(Periferal.jenis)
+                    setJenis(Periferal.jenis)
                 }
             }
         }
