@@ -69,6 +69,8 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType =
+            KeyboardType.Decimal),
             placeholder = { Text(text = "Rp. 0") }
         )
         OutlinedTextField(
@@ -80,8 +82,6 @@ fun FormPencatatanPeriferal(navController : NavHostController, id: String? = nul
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(keyboardType =
-            KeyboardType.Decimal),
             placeholder = { Text(text = "Deskripsi") }
         )
 

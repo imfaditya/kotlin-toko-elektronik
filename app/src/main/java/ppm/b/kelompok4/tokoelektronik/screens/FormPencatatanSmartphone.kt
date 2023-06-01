@@ -21,9 +21,13 @@ import ppm.b.kelompok4.tokoelektronik.ui.theme.Purple700
 import ppm.b.kelompok4.tokoelektronik.ui.theme.Teal200
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.vanpra.composematerialdialogs.MaterialDialog
+import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 //import ppm.b.kelompok4.tokoelektronik.ui.theme.tokoelektronikTheme
 import kotlinx.coroutines.launch
 import ppm.b.kelompok4.tokoelektronik.model.Smartphone
+import java.time.format.DateTimeFormatter
 
 
 @Composable
@@ -33,6 +37,7 @@ fun FormPencatatanSmartphone(navController : NavHostController, id: String? = nu
     val isLoading = remember { mutableStateOf(false) }
     val buttonLabel = if (isLoading.value) "Mohon tunggu..." else
         "Simpan"
+    val tanggalDialogState = rememberMaterialDialogState()
     val viewModel = hiltViewModel<PengelolaanSmartphoneViewModel>()
     val scope = rememberCoroutineScope()
     val model = remember { mutableStateOf(TextFieldValue("")) }
@@ -87,13 +92,17 @@ fun FormPencatatanSmartphone(navController : NavHostController, id: String? = nu
         OutlinedTextField(
             label = { Text(text = "Tanggal Rilis") },
             value = tanggalRilis.value,
+            enabled = false,
             onValueChange = {
                 tanggalRilis.value = it
             },
             modifier = Modifier
                 .padding(4.dp)
-                .fillMaxWidth(),
-            placeholder = { Text(text = "DD-MM-YYYY") }
+                .fillMaxWidth()
+                .clickable {
+                    tanggalDialogState.show()
+                },
+            textStyle = TextStyle(color = Color.Black)
         )
         Box(
             modifier = Modifier.padding(top = 8.dp)
@@ -206,6 +215,16 @@ fun FormPencatatanSmartphone(navController : NavHostController, id: String? = nu
                     setSistemOperasi(Smartphone.sistem_operasi)
                 }
             }
+        }
+    }
+
+    MaterialDialog(dialogState = tanggalDialogState, buttons = {
+        positiveButton("OK")
+        negativeButton("Batal")
+    }) {
+        datepicker { date ->
+            tanggalRilis.value =
+                TextFieldValue(date.format(DateTimeFormatter.ISO_LOCAL_DATE))
         }
     }
 }

@@ -14,7 +14,7 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
     val isLoading: LiveData<Boolean> get()= _isLoading
     private val _success: MutableLiveData<Boolean> = MutableLiveData(false)
     val success: LiveData<Boolean> get() = _success
-    private val _toast: MutableLiveData<String> = MutableLiveData("")
+    private val _toast: MutableLiveData<String> = MutableLiveData()
     val toast: LiveData<String> get() = _toast
     private val _listData: MutableLiveData<List<Komputer>> = MutableLiveData()
     val listData: LiveData<List<Komputer>> get() = _listData
@@ -51,8 +51,8 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
                 _toast.postValue(message)
                 _isLoading.postValue(false)
             }, onSuccess = {
-                _isLoading.postValue(false)
                 _success.postValue(true)
+                _isLoading.postValue(false)
             })
     }
 
@@ -70,8 +70,21 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
                 _toast.postValue(message)
                 _isLoading.postValue(false)
             }, onSuccess = {
-                _isLoading.postValue(false)
                 _success.postValue(true)
+                _isLoading.postValue(false)
             })
+    }
+
+    suspend fun delete(id: String) {
+        _isLoading.postValue(true)
+        komputerRepository.delete(id, onError = { message ->
+            _toast.postValue(message)
+            _isLoading.postValue(false)
+            _success.postValue(true)
+        }, onSuccess = {
+            _toast.postValue("Data Berhasil Dihapus")
+            _isLoading.postValue(false)
+            _success.postValue(true)
+        })
     }
 }

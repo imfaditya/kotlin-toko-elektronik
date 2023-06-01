@@ -26,5 +26,5 @@ interface PeriferalDao {
     fun delete(item: Periferal)
 
     @Query("DELETE FROM Periferal WHERE id = :id")
-    fun delete(id: String)
+    suspend fun delete(id: String)
 }

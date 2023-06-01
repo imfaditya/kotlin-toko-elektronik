@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ppm.b.kelompok4.tokoelektronik.model.Periferal
-import ppm.b.kelompok4.tokoelektronik.model.Smartphone
 import ppm.b.kelompok4.tokoelektronik.repositories.PeriferalRepository
 import javax.inject.Inject
 @HiltViewModel
@@ -69,6 +68,19 @@ class PengelolaanPeriferalViewModel @Inject constructor(private val PeriferalRep
                 _isLoading.postValue(false)
                 _success.postValue(true)
             })
+    }
+
+    suspend fun delete(id: String) {
+        _isLoading.postValue(true)
+        PeriferalRepository.delete(id, onError = { message ->
+            _toast.postValue(message)
+            _isLoading.postValue(false)
+            _success.postValue(true)
+        }, onSuccess = {
+            _toast.postValue("Data Berhasil Dihapus")
+            _isLoading.postValue(false)
+            _success.postValue(true)
+        })
     }
 }
 

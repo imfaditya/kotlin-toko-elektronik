@@ -26,8 +26,7 @@ class PeriferalRepository @Inject constructor(
                 data.whatIfNotNull {
                     it.data?.let { list ->
                         dao.insertAll(list)
-                        val items: List<Periferal> =
-                            dao.getList()
+                        val items: List<Periferal> = dao.getList()
                         onSuccess(items)
                     }
                 }
