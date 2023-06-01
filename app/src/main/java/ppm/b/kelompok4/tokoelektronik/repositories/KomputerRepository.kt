@@ -26,8 +26,7 @@ class KomputerRepository @Inject constructor(
                 data.whatIfNotNull {
                     it.data?.let { list ->
                         dao.insertAll(list)
-                        val items: List<Komputer> =
-                            dao.getList()
+                        val items: List<Komputer> = dao.getList()
                         onSuccess(items)
                     }
                 }

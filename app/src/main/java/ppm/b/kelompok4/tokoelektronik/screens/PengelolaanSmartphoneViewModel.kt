@@ -71,5 +71,18 @@ class PengelolaanSmartphoneViewModel @Inject constructor(private val SmartphoneR
                 _success.postValue(true)
             })
     }
+
+    suspend fun delete(id: String) {
+        _isLoading.postValue(true)
+        SmartphoneRepository.delete(id, onError = { message ->
+            _toast.postValue(message)
+            _isLoading.postValue(false)
+            _success.postValue(true)
+        }, onSuccess = {
+            _toast.postValue("Data Berhasil Dihapus")
+            _isLoading.postValue(false)
+            _success.postValue(true)
+        })
+    }
 }
 

@@ -67,7 +67,11 @@ fun MainScreen() {
                                     ContentAlpha.high,
                         ) {
                             IconButton(
-                                onClick = { },
+                                onClick = {
+                                    scope.launch {
+                                        scaffoldState.drawerState.open()
+                                    }
+                                },
                                 enabled = true,
                             ) {
                                 Icon(Icons.Filled.Menu, null,

@@ -25,5 +25,5 @@ interface SmartphoneDao {
     fun delete(item: Smartphone)
 
     @Query("DELETE FROM Smartphone WHERE id = :id")
-    fun delete(id: String)
+    suspend fun delete(id: String)
 }

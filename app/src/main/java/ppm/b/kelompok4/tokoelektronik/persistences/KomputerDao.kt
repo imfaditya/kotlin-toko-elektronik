@@ -25,5 +25,5 @@ interface KomputerDao {
     fun delete(item: Komputer)
 
     @Query("DELETE FROM Komputer WHERE id = :id")
-    fun delete(id: String)
+    suspend fun delete(id: String)
 }

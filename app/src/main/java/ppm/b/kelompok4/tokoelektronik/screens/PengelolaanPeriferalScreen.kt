@@ -32,54 +32,24 @@ fun PengelolaanPeriferalScreen(navController : NavHostController, modifier: Modi
 
     val viewModel = hiltViewModel<PengelolaanPeriferalViewModel>()
     val scope = rememberCoroutineScope()
-    val context = LocalContext.current
-
-
     val items: List<Periferal> by viewModel.list.observeAsState(initial = listOf())
 
     Column(modifier = modifier.fillMaxWidth()) {
-        Button(onClick = {
-            navController.navigate("tambah-pengelolaan-periferal")
-        }) {
-            Text(text = "Tambah")
+        Button(modifier = Modifier
+            .padding(15.dp)
+            .fillMaxWidth(),
+            onClick = {
+                navController.navigate("tambah-pengelolaan-periferal")
+            }) {
+            Text(text = "Tambah Data", modifier = Modifier.padding(4.dp))
         }
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(items = items, itemContent = { item ->
-                Row(modifier = Modifier
-                    .padding(15.dp)
-                    .fillMaxWidth().clickable {
-                        navController.navigate("edit-pengelolaan-periferal/${item.id}")
-                    }) {
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Nama", fontSize = 14.sp)
-                        Text(
-                            text = item.nama, fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Harga", fontSize = 14.sp)
-                        Text(
-                            text = "Rp. ${item.harga}", fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Deskripsi", fontSize = 14.sp)
-                        Text(
-                            text = item.deskripsi, fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Jenis", fontSize = 14.sp)
-                        Text(
-                            text = item.jenis, fontSize = 16.sp, fontWeight =
-                            FontWeight.Bold
-                        )
+                PeriferalItem(item = item, navController = navController) {
+                    scope.launch {
+                        viewModel.delete(it)
                     }
                 }
-                Divider(modifier = Modifier.fillMaxWidth())
             })
         }
     }
@@ -93,10 +63,11 @@ fun PengelolaanPeriferalScreen(navController : NavHostController, modifier: Modi
             }
         }
     }
+
     viewModel.toast.observe(LocalLifecycleOwner.current) {
         scope.launch {
             snackbarHostState.showSnackbar(it, actionLabel =
-            "Tutup", duration = SnackbarDuration.Long)
+            "Tutup", duration = SnackbarDuration.Short)
         }
     }
 }
