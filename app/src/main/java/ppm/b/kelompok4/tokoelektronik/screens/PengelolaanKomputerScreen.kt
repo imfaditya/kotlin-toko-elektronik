@@ -32,7 +32,10 @@ fun PengelolaanKomputerScreen(navController : NavHostController, modifier: Modif
         }) {
             Text(text = "Tambah Data", modifier = Modifier.padding(4.dp))
         }
-        LazyColumn(modifier = Modifier.fillMaxWidth()) {
+
+        LazyColumn(modifier = Modifier
+            .fillMaxWidth()
+        ) {
             items(items = items, itemContent = { item ->
                 KomputerItem(item = item, navController = navController) {
                     scope.launch {

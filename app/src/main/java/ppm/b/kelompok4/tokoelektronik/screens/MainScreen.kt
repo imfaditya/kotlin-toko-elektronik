@@ -139,6 +139,11 @@ fun MainScreen() {
             NavHost(navController = navController,
                 startDestination = "pengelolaan-komputer") {
 
+                composable("about") {
+                    title.value = "About Cloudtech"
+                    AboutScreen(modifier = Modifier.padding(innerPadding))
+                }
+
                 composable("pengelolaan-smartphone") {
                     title.value = "Pengelolaan Smartphone"
                     PengelolaanSmartphoneScreen(navController =

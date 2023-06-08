@@ -6,8 +6,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ppm.b.kelompok4.tokoelektronik.model.Komputer
-import ppm.b.kelompok4.tokoelektronik.model.Periferal
 import ppm.b.kelompok4.tokoelektronik.persistences.AppDatabase
 import ppm.b.kelompok4.tokoelektronik.persistences.KomputerDao
 import ppm.b.kelompok4.tokoelektronik.persistences.PeriferalDao
