@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -24,9 +23,7 @@ import androidx.navigation.NavHostController
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
-//import ppm.b.kelompok4.tokoelektronik.ui.theme.tokoelektronikTheme
 import kotlinx.coroutines.launch
-import ppm.b.kelompok4.tokoelektronik.model.Smartphone
 import java.time.format.DateTimeFormatter
 
 

@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -21,10 +20,7 @@ import ppm.b.kelompok4.tokoelektronik.ui.theme.Purple700
 import ppm.b.kelompok4.tokoelektronik.ui.theme.Teal200
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-//import ppm.b.kelompok4.tokoelektronik.ui.theme.tokoelektronikTheme
 import kotlinx.coroutines.launch
-import ppm.b.kelompok4.tokoelektronik.model.Periferal
-import ppm.b.kelompok4.tokoelektronik.model.Smartphone
 
 
 @Composable

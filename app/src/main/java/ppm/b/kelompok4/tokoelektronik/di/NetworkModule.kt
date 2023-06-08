@@ -25,9 +25,6 @@ object NetworkModule {
                             Context): OkHttpClient {
         return OkHttpClient.Builder()
 //Hanya untuk development/debug. Tidak disarankan untuk produksi.
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            })
             .build()
     }
     @Provides

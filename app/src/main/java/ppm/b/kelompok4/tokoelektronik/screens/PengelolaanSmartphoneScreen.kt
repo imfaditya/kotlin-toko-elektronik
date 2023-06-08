@@ -1,6 +1,5 @@
 package ppm.b.kelompok4.tokoelektronik.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

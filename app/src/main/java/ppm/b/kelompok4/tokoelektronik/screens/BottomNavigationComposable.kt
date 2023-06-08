@@ -10,6 +10,7 @@ import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 @Composable
 fun BottomNavigationComposable(title : String, onClick: (Menu) -> Unit)
@@ -26,9 +27,11 @@ fun BottomNavigationComposable(title : String, onClick: (Menu) -> Unit)
                 },
                 icon = {
                     Icon(
-                        tab.icon,
+                        painterResource(id = tab.icon),
                         modifier =
-                        Modifier.height(32.dp).width(32.dp),
+                        Modifier
+                            .height(30.dp)
+                            .width(30.dp),
                         contentDescription = null,
                         tint = Color.White
                     )

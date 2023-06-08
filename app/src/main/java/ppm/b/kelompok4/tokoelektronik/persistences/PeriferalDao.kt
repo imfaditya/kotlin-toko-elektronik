@@ -2,7 +2,6 @@ package ppm.b.kelompok4.tokoelektronik.persistences
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ppm.b.kelompok4.tokoelektronik.model.Komputer
 import ppm.b.kelompok4.tokoelektronik.model.Periferal
 
 @Dao

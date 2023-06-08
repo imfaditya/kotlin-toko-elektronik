@@ -22,6 +22,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -39,10 +40,14 @@ fun DrawerContent(onClick: (String) -> Unit)
         modifier = Modifier
             .background(MaterialTheme.colors.background)
     ) {
-        Row (modifier = Modifier.fillMaxWidth().padding(5.dp),
+        Row (modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp),
             horizontalArrangement = Arrangement.Center) {
             Text("Selamat Datang", modifier =
-            Modifier.height(32.dp).padding(2.dp),
+            Modifier
+                .height(32.dp)
+                .padding(2.dp),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold)
         }
@@ -61,19 +66,25 @@ fun DrawerContent(onClick: (String) -> Unit)
                     contentColor = Color.Black
                 ) {
                     Row (modifier =
-                    Modifier.padding(5.dp).clickable {
-                        onClick(menu.route)
-                    }) {
+                    Modifier
+                        .padding(5.dp)
+                        .clickable {
+                            onClick(menu.route)
+                        }) {
                         Icon(
-                            menu.icon,
+                            painterResource(id = menu.icon),
                             modifier =
-                            Modifier.height(32.dp).width(32.dp),
+                            Modifier
+                                .height(32.dp)
+                                .width(32.dp),
                             contentDescription = null,
                             tint = Color.Unspecified)
                         Text(
                             stringResource(id = menu.title),
                             modifier =
-                            Modifier.height(32.dp).padding(2.dp),
+                            Modifier
+                                .height(32.dp)
+                                .padding(2.dp),
                             fontSize = 18.sp,
                             fontWeight = FontWeight.SemiBold)
                     }
