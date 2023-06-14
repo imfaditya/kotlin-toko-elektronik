@@ -44,15 +44,13 @@ fun DrawerContent(onClick: (String) -> Unit)
             .fillMaxWidth()
             .padding(5.dp),
             horizontalArrangement = Arrangement.Center) {
-            Text("Selamat Datang", modifier =
+            Text("Hello", modifier =
             Modifier
-                .height(32.dp)
-                .padding(2.dp),
+                .height(50.dp)
+                .padding(10.dp),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold)
         }
-        Divider(startIndent = 8.dp, thickness = 1.dp, color =
-        Color.Black)
         LazyColumn(
             state = listState,
             contentPadding = PaddingValues(0.dp)
@@ -62,8 +60,8 @@ fun DrawerContent(onClick: (String) -> Unit)
                     shape = RoundedCornerShape(4.dp),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(5.dp),
-                    contentColor = Color.Black
+                        .padding(7.dp),
+                    contentColor = Color.DarkGray,
                 ) {
                     Row (modifier =
                     Modifier
@@ -85,8 +83,7 @@ fun DrawerContent(onClick: (String) -> Unit)
                             Modifier
                                 .height(32.dp)
                                 .padding(2.dp),
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold)
+                            fontSize = 18.sp)
                     }
                 }
             }

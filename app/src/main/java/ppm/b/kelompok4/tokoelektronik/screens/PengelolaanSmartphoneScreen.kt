@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -29,6 +31,7 @@ fun PengelolaanSmartphoneScreen(navController : NavHostController, modifier: Mod
             onClick = {
                 navController.navigate("tambah-pengelolaan-smartphone")
             }) {
+            Icon(Icons.Filled.Add, contentDescription = "add icon")
             Text(text = "Tambah Data", modifier = Modifier.padding(4.dp))
         }
         LazyColumn(modifier = Modifier.fillMaxWidth()) {

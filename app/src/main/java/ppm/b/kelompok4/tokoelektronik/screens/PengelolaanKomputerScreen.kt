@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,6 +32,7 @@ fun PengelolaanKomputerScreen(navController : NavHostController, modifier: Modif
             onClick = {
             navController.navigate("tambah-pengelolaan-komputer")
         }) {
+            Icon(Icons.Filled.Add, contentDescription = "add icon")
             Text(text = "Tambah Data", modifier = Modifier.padding(4.dp))
         }
 
