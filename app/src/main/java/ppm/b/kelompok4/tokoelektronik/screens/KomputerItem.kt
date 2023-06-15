@@ -30,9 +30,7 @@ fun KomputerItem (item: Komputer, navController: NavHostController, onDelete: (S
         modifier = Modifier
             .padding(15.dp)
             .fillMaxWidth()
-            .clickable {
-                navController.navigate("edit-pengelolaan-komputer/" + item.id)
-            },
+            ,
         elevation = 4.dp
     ) {
         Row(modifier = Modifier.padding(15.dp)) {

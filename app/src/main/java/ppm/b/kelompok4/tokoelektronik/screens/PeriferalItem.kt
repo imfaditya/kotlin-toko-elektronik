@@ -30,9 +30,7 @@ fun PeriferalItem (item: Periferal, navController: NavHostController, onDelete: 
         modifier = Modifier
             .padding(15.dp)
             .fillMaxWidth()
-            .clickable {
-                navController.navigate("edit-pengelolaan-periferal/" + item.id)
-            },
+            ,
         elevation = 4.dp
     ) {
         Row(modifier = Modifier.padding(15.dp)) {
